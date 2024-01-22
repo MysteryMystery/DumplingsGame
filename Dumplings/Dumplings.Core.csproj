@@ -26,6 +26,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Dumplings.Api\Dumplings.Api.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Content\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
     <Exec Command="dotnet tool restore" />
