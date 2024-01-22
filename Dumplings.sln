@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dumplings.Core", "Dumplings\Dumplings.Core.csproj", "{5D7F1ECF-BE9C-435D-B253-F15F5185EA77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dumplings.Api", "Dumplings.Api\Dumplings.Api.csproj", "{168F8D49-213A-471D-8039-C0A7E986230C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D7F1ECF-BE9C-435D-B253-F15F5185EA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D7F1ECF-BE9C-435D-B253-F15F5185EA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D7F1ECF-BE9C-435D-B253-F15F5185EA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D7F1ECF-BE9C-435D-B253-F15F5185EA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{168F8D49-213A-471D-8039-C0A7E986230C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{168F8D49-213A-471D-8039-C0A7E986230C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{168F8D49-213A-471D-8039-C0A7E986230C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{168F8D49-213A-471D-8039-C0A7E986230C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FEEE47A1-C73E-4CA6-80E1-13CB4000703D}
+	EndGlobalSection
+EndGlobal
