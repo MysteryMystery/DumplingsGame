@@ -31,8 +31,8 @@ jobs:
     - name: DotNet Test
       run: dotnet test --no-build --verbosity normal
     - name: DotNet Publish
-      run: dotnet publish -c Release -r ${{ matrix.runtime }} --nologo
+      run: dotnet publish -c Release -r ${{ matrix.runtime }} --self-contained --nologo
     - uses: actions/upload-artifact@master
       with:
         name: dumplings-game-${{ matrix.runtime }}
-        path: '**/bin/**/net6.0/publish/'
+        path: '**/bin/**/net6.0/${{ matrix.runtime }}/publish'
