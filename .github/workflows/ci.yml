@@ -14,6 +14,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy: 
+      matrix:
+        runtime: 
+          - win10-x64
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -27,8 +31,8 @@ jobs:
     - name: DotNet Test
       run: dotnet test --no-build --verbosity normal
     - name: DotNet Publish
-      run: dotnet publish -c Release --nologo
+      run: dotnet publish -c Release -r ${{ matrix.runtime }} --nologo
     - uses: actions/upload-artifact@master
       with:
-        name: dumplings
+        name: dumplings-game-${{ matrix.runtime }}
         path: '**/bin/**/net6.0/publish/'
