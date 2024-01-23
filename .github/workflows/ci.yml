@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: 
+    - main
+    - feature/*
+  pull_request:
+    branches: 
+    - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix:
+        runtime: 
+          - win10-x64
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: DotNet Build
+      run: dotnet build --no-restore
+    - name: DotNet Test
+      run: dotnet test --no-build --verbosity normal
+    - name: DotNet Publish
+      run: dotnet publish -c Release -r ${{ matrix.runtime }} --self-contained --nologo
+    - uses: actions/upload-artifact@master
+      with:
+        name: dumplings-game-${{ matrix.runtime }}
+        path: '**/bin/**/net6.0/${{ matrix.runtime }}/publish'
