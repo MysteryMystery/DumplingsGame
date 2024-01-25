@@ -1,6 +1,8 @@
-﻿using Dumplings.Api.Event.Events;
+﻿using Dumplings.Api;
+using Dumplings.Api.Event.Events;
 using Dumplings.Api.Logic.Screen;
 using Dumplings.Api.State;
+using Dumplings.Core.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Myra.Graphics2D;
@@ -108,37 +110,69 @@ namespace Dumplings.Core.Screens
             var count = 0;
             foreach(var board in _logic.PlayerBoards)
             {
-                var x = new VerticalSplitPane();
-                x.Height = 160;
-                x.Width = 250;
+                var vsp = new VerticalSplitPane();
+                vsp.Height = 160;
+                vsp.Width = 250;
 
-                var top = new Panel();
+                var top = new Grid();
                 top.Background = new SolidBrush(Color.Goldenrod);
-                top.Height = 80;
+                top.Height = 100;
                 top.Width = 250;
 
+
+                var x = 0;
+                var y = 0;
                 foreach (KeyValuePair<Api.DumplingType, int> dumpling in _logic.PlayerBoards[count].Dumplings)
                 {
                     // put the unlinked dumplings onto board
+                    for(int i = 0; i < dumpling.Value; i++)
+                    {
+                        var dp = new Panel();
+                        dp.Background = new TextureRegion(new DumplingSprite(dumpling.Key).Texture);
+                        dp.Width = 64;
+                        dp.Height = 64;
+                        dp.HorizontalAlignment = HorizontalAlignment.Center;
+                        dp.VerticalAlignment = VerticalAlignment.Center;
+
+                        if (x > 5)
+                        {
+                            x = 0;
+                            y++;
+                        }
+
+                        Grid.SetColumn(dp, x);
+                        Grid.SetRow(dp, y);
+                        x++;
+
+                        top.AddChild(dp);
+                    }
+
                 }
 
-                x.AddChild(top);
+                vsp.AddChild(top);
 
-                var bot = new Panel();
+                var bot = new HorizontalSplitPane();
                 bot.Background = new SolidBrush(Color.SlateGray);
-                bot.Height = 80;
+                bot.Height = 60;
                 bot.Width = 250;
 
                 foreach (Api.DumplingType completedSet in _logic.PlayerBoards[count].CompletedSets)
                 {
                     // put the completed sets onto the board
+                    var dp = new Panel();
+                    dp.Background = new TextureRegion(new DumplingSprite(completedSet).Texture);
+                    dp.Width = 64;
+                    dp.Height = 64;
+                    dp.HorizontalAlignment = HorizontalAlignment.Center;
+                    dp.VerticalAlignment = VerticalAlignment.Center;
+                    bot.AddChild(dp);
                 }
 
-                x.AddChild(bot);
+                vsp.AddChild(bot);
 
-                Grid.SetColumn(x, count < 3 ? count : 1);
-                Grid.SetRow(x, count < 3 ? 1 : 2);
-                grid.AddChild(x);
+                Grid.SetColumn(vsp, count < 3 ? count : 1);
+                Grid.SetRow(vsp, count < 3 ? 1 : 2);
+                grid.AddChild(vsp);
                 count++;
             }
 
